@@ -43,7 +43,7 @@ export default {
     proxy: true // Can be also an object with default options
   },
   proxy: {
-    '/api/v1': { target: 'https://api.rajaongkir.com', pathRewrite: {'^/api/v1': ''} }
+    '/api/v1': { target: 'https://api.rajaongkir.com', pathRewrite: {'^/api/v1': ''}, changeOrigin: true }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
