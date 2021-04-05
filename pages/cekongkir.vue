@@ -10,16 +10,6 @@
     <select v-model="selectedCity">
       <option v-for="(x, index) in city" :key="index" :value="index">{{x.city_name}}</option>
     </select>
-    <!-- <select
-      onChange={(e) => setProvProvince(e.target.value)}
-      required
-    >
-      {
-        allProvince.map( (x, index) => (
-          <option key={x.province_id} value={ x.province_id}>{ x.province }</option>
-        ))
-      }
-    </select> -->
     <span>selectedProv: {{ selectedProv }}</span>
 
     <button @click="setProv()">setProv</button>
@@ -54,9 +44,10 @@ export default {
     }
 
     async function setProv(){
-      const url = `/starter/province`
+      const url = `https://api.rajaongkir.com/starter/province`
       const headers = { key: 'fae48b5d186bfaa993f687ec1ac499b1' }
-      const data = await axios.get(`/api/v1${url}`, {headers});
+      // const data = await axios.get(`/api/v1${url}`, {headers});
+      const data = await axios.get(`${url}`, {headers});
       province.value = data?.data?.rajaongkir?.results
       // console.log(province.value)
       // setCity()

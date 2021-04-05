@@ -35,7 +35,13 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: ['@nuxt/http', '@nuxtjs/axios', '@nuxtjs/proxy'],
-  axios: {},
+  // axios: {},
+  axios: {
+    baseURL: 'https://api.rajaongkir.com', // Used as fallback if no runtime config is provided
+  },
+  http: {
+    proxy: true // Can be also an object with default options
+  },
   proxy: {
     '/api/v1': { target: 'https://api.rajaongkir.com', pathRewrite: {'^/api/v1': ''} }
   },
