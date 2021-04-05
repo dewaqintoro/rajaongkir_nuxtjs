@@ -90,10 +90,24 @@
             <p class="text-lg font-bold">Kurir</p>
           </div>
           <div class="mt-4">
-            <div v-for="(x, index) in biaya" :key="index" class="kurir flex mb-4 p-2 rounded-xl">
+            <div v-for="(x, index) in biayaJne" :key="index" class="kurir flex mb-4 p-2 rounded-xl">
               <!-- <input type="radio" :id="x.service" :value="x.cost[0].value" class="my-auto" v-model="picked"> -->
               <label for="one" class="ml-4">
                 <h1>JNE</h1>
+                <p>{{x.service}} : {{x.cost[0].value}}</p>
+              </label>
+            </div>
+            <div v-for="(x, index) in biayaPos" :key="index" class="kurir flex mb-4 p-2 rounded-xl">
+              <!-- <input type="radio" :id="x.service" :value="x.cost[0].value" class="my-auto" v-model="picked"> -->
+              <label for="one" class="ml-4">
+                <h1>POS</h1>
+                <p>{{x.service}} : {{x.cost[0].value}}</p>
+              </label>
+            </div>
+            <div v-for="(x, index) in biayaTiki" :key="index" class="kurir flex mb-4 p-2 rounded-xl">
+              <!-- <input type="radio" :id="x.service" :value="x.cost[0].value" class="my-auto" v-model="picked"> -->
+              <label for="one" class="ml-4">
+                <h1>Tiki</h1>
                 <p>{{x.service}} : {{x.cost[0].value}}</p>
               </label>
             </div>
@@ -118,7 +132,9 @@ export default {
     const asalProv = ref('')
     const selectedCity = ref('')
     const asalCity = ref('')
-    const biaya = ref('')
+    const biayaJne = ref('')
+    const biayaPos = ref('')
+    const biayaTiki = ref('')
     const picked = ref('')
 
     setProv()
@@ -132,7 +148,9 @@ export default {
       asalCity,
       selectedProv,
       selectedCity,
-      biaya,
+      biayaJne,
+      biayaPos,
+      biayaTiki,
       picked,
       cek,
       setProv,
@@ -166,11 +184,30 @@ export default {
     }
 
     async function cekBiaya(){
-      const url = `https://ngodingbentar-api.herokuapp.com/api/orders/ongkir/${asalCity.value}/${selectedCity.value}/${berat.value}`
+      cekBiayaJne()
+      cekBiayaPos()
+      cekBiayaTiki()
+    }
+
+    async function cekBiayaJne(){
+      const url = `https://ngodingbentar-api.herokuapp.com/api/orders/ongkir/jne/${asalCity.value}/${selectedCity.value}/${berat.value}`
       // const data = await axios.get(`/api/v1${url}`, {headers});
       const data = await axios.get(`${url}`);
-      console.log('data', data?.data?.rajaongkir)
-      biaya.value = data?.data?.rajaongkir?.results[0]?.costs
+      biayaJne.value = data?.data?.rajaongkir?.results[0]?.costs
+    }
+
+    async function cekBiayaPos(){
+      const url = `https://ngodingbentar-api.herokuapp.com/api/orders/ongkir/pos/${asalCity.value}/${selectedCity.value}/${berat.value}`
+      // const data = await axios.get(`/api/v1${url}`, {headers});
+      const data = await axios.get(`${url}`);
+      biayaPos.value = data?.data?.rajaongkir?.results[0]?.costs
+    }
+
+    async function cekBiayaTiki(){
+      const url = `https://ngodingbentar-api.herokuapp.com/api/orders/ongkir/tiki/${asalCity.value}/${selectedCity.value}/${berat.value}`
+      // const data = await axios.get(`/api/v1${url}`, {headers});
+      const data = await axios.get(`${url}`);
+      biayaTiki.value = data?.data?.rajaongkir?.results[0]?.costs
     }
   }
 }
