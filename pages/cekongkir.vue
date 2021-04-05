@@ -44,22 +44,23 @@ export default {
     }
 
     async function setProv(){
-      const url = `https://api.rajaongkir.com/starter/province`
+      const url = `https://aruspinggir-v1.herokuapp.com/api/orders/province`
       const headers = { key: 'fae48b5d186bfaa993f687ec1ac499b1' }
       // const data = await axios.get(`/api/v1${url}`, {headers});
-      const data = await axios.get(`${url}`, {headers});
+      const data = await axios.get(`${url}`);
       province.value = data?.data?.rajaongkir?.results
       // console.log(province.value)
       // setCity()
     }
 
     async function setCity(){
-      const url = `/starter/city?province=${selectedProv.value}`
+      // const url = `/starter/city?province=${selectedProv.value}`
+      const url = `https://aruspinggir-v1.herokuapp.com/api/orders/city/${selectedProv.value}`
       const headers = { key: 'fae48b5d186bfaa993f687ec1ac499b1' }
       const qs= {province: selectedProv.value}
-      const data = await axios.get(`/api/v1${url}`, {headers});
+      // const data = await axios.get(`/api/v1${url}`, {headers});
+      const data = await axios.get(`${url}`);
       city.value = data?.data?.rajaongkir?.results
-      console.log(data)
     }
   }
 }
