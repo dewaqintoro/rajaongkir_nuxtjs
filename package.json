@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@nuxt/http": "^0.6.4",
-    "@nuxtjs/vercel-builder": "^0.21.2",
     "core-js": "^3.9.1",
     "nuxt": "^2.15.3"
   },
