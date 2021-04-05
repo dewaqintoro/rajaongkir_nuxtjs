@@ -44,7 +44,7 @@ export default {
     }
 
     async function setProv(){
-      const url = `https://aruspinggir-v1.herokuapp.com/api/orders/province`
+      const url = `https://ngodingbentar-api.herokuapp.com/api/orders/province`
       const headers = { key: 'fae48b5d186bfaa993f687ec1ac499b1' }
       // const data = await axios.get(`/api/v1${url}`, {headers});
       const data = await axios.get(`${url}`);
@@ -55,7 +55,7 @@ export default {
 
     async function setCity(){
       // const url = `/starter/city?province=${selectedProv.value}`
-      const url = `https://aruspinggir-v1.herokuapp.com/api/orders/city/${selectedProv.value}`
+      const url = `https://ngodingbentar-api.herokuapp.com/api/orders/city/${selectedProv.value}`
       const headers = { key: 'fae48b5d186bfaa993f687ec1ac499b1' }
       const qs= {province: selectedProv.value}
       // const data = await axios.get(`/api/v1${url}`, {headers});
