@@ -1,33 +1,90 @@
 <template>
-  <div>
-    <h1>Cek pengiriman</h1>
-    <h1>Berat : {{berat}}</h1>
-    <input v-model="berat" @change="cek($event)" placeholder="berat">
-    <h1>Pilih asal</h1>
-    <select v-model="asalProv" @change="setAsalCity()">
-      <option v-for="(prov, index) in province" :key="index" :value="prov.province_id">{{prov.province}}</option>
-    </select>
-
-    <select v-model="asalCity">
-      <option v-for="(x, index) in cityAsal" :key="index" :value="x.city_id">{{x.city_name}}</option>
-    </select>
-    <br/>
-    <hr/>
-    <h1>Pilih tujuan</h1>
-    <select v-model="selectedProv" @change="setCity()">
-      <option v-for="(prov, index) in province" :key="index" :value="prov.province_id">{{prov.province}}</option>
-    </select>
-
-    <select v-model="selectedCity">
-      <option v-for="(x, index) in city" :key="index" :value="x.city_id">{{x.city_name}}</option>
-    </select>
-
-    <button @click="cek()">cek</button>
-    <br/>
-    <button @click="cekBiaya()">cekBiaya</button>
-    <br/>
-    <!-- <h1>{{biaya}}</h1> -->
-    <p v-for="(x, index) in biaya" :key="index">{{x.cost[0].value}}</p>
+  <div class="bg-gray-100 h-screen">
+    <div class="bg-white">
+      <header class="text-gray-600 body-font">
+        <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+          <a class="flex order-first lg:order-none lg:w-1/5 title-font font-medium items-center text-gray-900 lg:items-center lg:justify-center mb-4 md:mb-0">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+            </svg>
+            <span class="ml-3 text-xl">Tailblocks</span>
+          </a>
+        </div>
+      </header>
+    </div>
+    <div class="w-2/3 mx-auto bg-white p-16 my-8 rounded-3xl">
+      <div class="flex">
+        <form class="w-1/2 border-r-2">
+          <div class="flex flex-wrap mb-6 w-full">
+            <div class="w-full px-3 mb-6 md:mb-0">
+              <h1 class="font-bold text-xl">Alamat Asal</h1>
+              <label class="block  tracking-wide text-black text-xs font-semibold mt-4 mb-3" for="grid-first-name">
+                Pilih Provinsi
+              </label>
+              <div class="relative">
+                <select v-model="asalProv" @change="setAsalCity()" class="block appearance-none w-full border border-gray-200 text-black py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                  <option v-for="(prov, index) in province" :key="index" :value="prov.province_id">{{prov.province}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-wrap mb-6 w-full">
+            <div class="w-full px-3 mb-6 md:mb-0">
+              <label class="block  tracking-wide text-black text-xs font-semibold mt-4 mb-3" for="grid-first-name">
+                Pilih Kota
+              </label>
+              <div class="relative">
+                <select v-model="asalCity" class="block appearance-none w-full border border-gray-200 text-black py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                  <option v-for="(x, index) in cityAsal" :key="index" :value="x.city_id">{{x.city_name}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-wrap mb-2">
+            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+              <label class="block tracking-wide text-black text-xs font-bold mb-2" for="grid-city">
+                Berat (gram)
+              </label>
+              <input v-model="berat" @change="cek($event)"  class="appearance-none block w-full text-black border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" placeholder="1000">
+            </div>
+          </div>
+        </form>
+        <form class="w-1/2 border-l-2">
+          <div class="flex flex-wrap mb-6 w-full">
+            <div class="w-full px-3 mb-6 md:mb-0">
+              <h1 class="font-bold text-xl">Alamat Tujuan</h1>
+              <label class="block tracking-wide text-black text-xs font-semibold mt-4 mb-3" for="grid-first-name">
+                Pilih Provinsi
+              </label>
+              <div class="relative">
+                <select v-model="selectedProv" @change="setCity()" class="block appearance-none w-full border border-gray-200 text-black py-3 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                  <option v-for="(prov, index) in province" :key="index" :value="prov.province_id">{{prov.province}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-wrap mb-6 w-full">
+            <div class="w-full px-3 mb-6 md:mb-0">
+              <label class="block  tracking-wide text-black text-xs font-semibold mt-4 mb-3" for="grid-first-name">
+                Pilih Kota
+              </label>
+              <div class="relative">
+                <select v-model="selectedCity" class="block appearance-none w-full border border-gray-200 text-black py-3 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                  <option v-for="(x, index) in city" :key="index" :value="x.city_id">{{x.city_name}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <button @click="cekBiaya()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+        Cek biaya
+      </button>
+      <div>
+        
+      </div>
+      <p v-for="(x, index) in biaya" :key="index">{{x.cost[0].value}}</p>
+    </div>
   </div>
 </template>
 <script>
@@ -36,7 +93,7 @@ import axios from 'axios'
 export default {
   name: 'CekOngkir',
   setup(){
-    const berat = ref(1)
+    const berat = ref(1000)
     const provinceAsal = ref([])
     const cityAsal = ref([])
     const province = ref([])
@@ -49,7 +106,22 @@ export default {
 
     setProv()
 
-    return { berat, province, city, cityAsal, asalProv, asalCity, selectedProv, selectedCity, biaya, cek, setProv, setCity, setAsalCity, cekBiaya }
+    return {
+      berat,
+      province,
+      city,
+      cityAsal,
+      asalProv,
+      asalCity,
+      selectedProv,
+      selectedCity,
+      biaya,
+      cek,
+      setProv,
+      setCity,
+      setAsalCity,
+      cekBiaya
+    }
 
     function cek() {
       console.log('asal',asalCity.value)
@@ -85,3 +157,11 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.garis {
+  width: 5px;
+  height: 30vh;
+  background: black;
+}
+</style>
