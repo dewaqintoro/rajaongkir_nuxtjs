@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-100 h-screen">
+  <div class="min-h-screen bg-gray-100 ">
     <div class="bg-white">
       <header class="text-gray-600 body-font">
         <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
@@ -12,8 +12,8 @@
         </div>
       </header>
     </div>
-    <div class="flex my-8 px-8 justify-between">
-      <div class="w-4/6 p-8">
+    <div class="block lg:flex my-8 px-8 justify-between">
+      <div class="w-full lg:w-4/6 p-8">
         <div class="bg-white p-8 rounded-3xl">
           <div class="flex">
             <form class="w-1/2 border-r-2">
@@ -84,12 +84,12 @@
           </button>
         </div>
       </div>
-      <div class="w-2/6 p-8">
+      <div class="w-full lg:w-2/6 p-8 ">
         <div class="bg-white p-8 rounded-3xl">
           <div class="text-center">
             <p class="text-lg font-bold">Kurir</p>
           </div>
-          <div class="mt-4">
+          <div class="mt-4 overflow-y-auto section-kurir">
             <div v-for="(x, index) in biayaJne" :key="index" class="kurir flex mb-4 p-2 rounded-xl">
               <!-- <input type="radio" :id="x.service" :value="x.cost[0].value" class="my-auto" v-model="picked"> -->
               <label for="one" class="ml-4">
@@ -221,5 +221,9 @@ export default {
 }
 .kurir {
   background: #0fbcf9;
+}
+
+.section-kurir {
+  max-height: 350px;
 }
 </style>
