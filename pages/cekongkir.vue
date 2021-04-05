@@ -21,7 +21,6 @@
     <select v-model="selectedCity">
       <option v-for="(x, index) in city" :key="index" :value="x.city_id">{{x.city_name}}</option>
     </select>
-    <!-- <span>selectedProv: {{ selectedProv }}</span> -->
 
     <button @click="cek()">cek</button>
     <br/>
@@ -32,7 +31,7 @@
   </div>
 </template>
 <script>
-import { computed, ref, useContext } from '@nuxtjs/composition-api'
+import { ref } from '@nuxtjs/composition-api'
 import axios from 'axios'
 export default {
   name: 'CekOngkir',
@@ -42,7 +41,6 @@ export default {
     const cityAsal = ref([])
     const province = ref([])
     const city = ref([])
-    const { $axios, route } = useContext()
     const selectedProv = ref('')
     const asalProv = ref('')
     const selectedCity = ref('')
@@ -60,40 +58,23 @@ export default {
 
     async function setProv(){
       const url = `https://ngodingbentar-api.herokuapp.com/api/orders/province`
-      // const data = await axios.get(`/api/v1${url}`, {headers});
       const data = await axios.get(`${url}`);
       province.value = data?.data?.rajaongkir?.results
     }
 
     async function setAsalCity(){
-      // const url = `/starter/city?province=${selectedProv.value}`
       const url = `https://ngodingbentar-api.herokuapp.com/api/orders/city/${asalProv.value}`
-      // const qs= {province: selectedProv.value}
-      // const data = await axios.get(`/api/v1${url}`, {headers});
       const data = await axios.get(`${url}`);
       cityAsal.value = data?.data?.rajaongkir?.results
     }
 
     async function setCity(){
-      // const url = `/starter/city?province=${selectedProv.value}`
       const url = `https://ngodingbentar-api.herokuapp.com/api/orders/city/${selectedProv.value}`
       const qs= {province: selectedProv.value}
-      // const data = await axios.get(`/api/v1${url}`, {headers});
       const data = await axios.get(`${url}`);
       city.value = data?.data?.rajaongkir?.results
     }
 
-    async function cekBiaya_v1(){
-      // orderRouter.get('/ongkir/:origin/:destination/:weight',
-    // const { data } = await Axios.get(`/api/orders/ongkir/${ongkirId}/${weight}`);
-      const url = `https://ngodingbentar-api.herokuapp.com/api/orders/ongkir/${selectedCity.value}/${berat.value}`
-      // const data = await axios.get(`/api/v1${url}`, {headers});
-      const data = await axios.get(`${url}`);
-      biaya.value = data?.data?.rajaongkir?.results[0]?.costs
-      // console.log('biaya', biaya)
-      // console.log('biaya', biaya?.data?.rajaongkir?.results[0]?.costs)
-      // province.value = data?.data?.rajaongkir?.results
-    }
     async function cekBiaya(){
       const url = `https://ngodingbentar-api.herokuapp.com/api/orders/ongkir/${asalCity.value}/${selectedCity.value}/${berat.value}`
       // const data = await axios.get(`/api/v1${url}`, {headers});
