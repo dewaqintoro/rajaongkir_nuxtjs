@@ -30,10 +30,15 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/composition-api',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxt/http'],
+  modules: ['@nuxt/http', '@nuxtjs/axios', '@nuxtjs/proxy'],
+  axios: {},
+  proxy: {
+    '/api/v1': { target: 'https://api.rajaongkir.com', pathRewrite: {'^/api/v1': ''} }
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
