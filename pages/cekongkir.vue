@@ -1,9 +1,19 @@
 <template>
   <div>
-    <h1>Cek pengiriman dari jogja</h1>
+    <h1>Cek pengiriman</h1>
     <h1>Berat : {{berat}}</h1>
     <input v-model="berat" @change="cek($event)" placeholder="berat">
+    <h1>Pilih asal</h1>
+    <select v-model="asalProv" @change="setAsalCity()">
+      <option v-for="(prov, index) in province" :key="index" :value="prov.province_id">{{prov.province}}</option>
+    </select>
 
+    <select v-model="asalCity">
+      <option v-for="(x, index) in cityAsal" :key="index" :value="x.city_id">{{x.city_name}}</option>
+    </select>
+    <br/>
+    <hr/>
+    <h1>Pilih tujuan</h1>
     <select v-model="selectedProv" @change="setCity()">
       <option v-for="(prov, index) in province" :key="index" :value="prov.province_id">{{prov.province}}</option>
     </select>
@@ -13,7 +23,6 @@
     </select>
     <!-- <span>selectedProv: {{ selectedProv }}</span> -->
 
-    <!-- <button @click="setProv()">setProv</button> -->
     <button @click="cek()">cek</button>
     <br/>
     <button @click="cekBiaya()">cekBiaya</button>
@@ -29,20 +38,24 @@ export default {
   name: 'CekOngkir',
   setup(){
     const berat = ref(1)
+    const provinceAsal = ref([])
+    const cityAsal = ref([])
     const province = ref([])
     const city = ref([])
     const { $axios, route } = useContext()
     const selectedProv = ref('')
+    const asalProv = ref('')
     const selectedCity = ref('')
+    const asalCity = ref('')
     const biaya = ref('')
 
     setProv()
 
-    return { berat, province, city, selectedProv, selectedCity, biaya, cek, setProv, setCity, cekBiaya }
+    return { berat, province, city, cityAsal, asalProv, asalCity, selectedProv, selectedCity, biaya, cek, setProv, setCity, setAsalCity, cekBiaya }
 
     function cek() {
-      console.log('prov',selectedProv.value)
-      console.log('selectedCity',selectedCity.value)
+      console.log('asal',asalCity.value)
+      console.log('tujuan',selectedCity.value)
     }
 
     async function setProv(){
@@ -50,6 +63,15 @@ export default {
       // const data = await axios.get(`/api/v1${url}`, {headers});
       const data = await axios.get(`${url}`);
       province.value = data?.data?.rajaongkir?.results
+    }
+
+    async function setAsalCity(){
+      // const url = `/starter/city?province=${selectedProv.value}`
+      const url = `https://ngodingbentar-api.herokuapp.com/api/orders/city/${asalProv.value}`
+      // const qs= {province: selectedProv.value}
+      // const data = await axios.get(`/api/v1${url}`, {headers});
+      const data = await axios.get(`${url}`);
+      cityAsal.value = data?.data?.rajaongkir?.results
     }
 
     async function setCity(){
@@ -61,7 +83,8 @@ export default {
       city.value = data?.data?.rajaongkir?.results
     }
 
-    async function cekBiaya(){
+    async function cekBiaya_v1(){
+      // orderRouter.get('/ongkir/:origin/:destination/:weight',
     // const { data } = await Axios.get(`/api/orders/ongkir/${ongkirId}/${weight}`);
       const url = `https://ngodingbentar-api.herokuapp.com/api/orders/ongkir/${selectedCity.value}/${berat.value}`
       // const data = await axios.get(`/api/v1${url}`, {headers});
@@ -70,6 +93,13 @@ export default {
       // console.log('biaya', biaya)
       // console.log('biaya', biaya?.data?.rajaongkir?.results[0]?.costs)
       // province.value = data?.data?.rajaongkir?.results
+    }
+    async function cekBiaya(){
+      const url = `https://ngodingbentar-api.herokuapp.com/api/orders/ongkir/${asalCity.value}/${selectedCity.value}/${berat.value}`
+      // const data = await axios.get(`/api/v1${url}`, {headers});
+      const data = await axios.get(`${url}`);
+      console.log('data', data?.data?.rajaongkir)
+      biaya.value = data?.data?.rajaongkir?.results[0]?.costs
     }
   }
 }
