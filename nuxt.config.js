@@ -39,6 +39,13 @@ export default {
   axios: {
     baseURL: 'https://api.rajaongkir.com', // Used as fallback if no runtime config is provided
   },
+  // cloudinary: {
+  //   cloudName: 'dewaqintoro',
+  //   apiKey: '442818793864368',
+  //   apiSecret: 'MV75UbGl6gnlLkEyGqbgEpBEuVk',
+  //   secure: false,
+  //   useComponent: true
+  // },
   http: {
     proxy: true // Can be also an object with default options
   },

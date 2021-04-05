@@ -7,7 +7,10 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
             </svg>
-            <span class="ml-3 text-xl">Tailblocks</span>
+            <span class="ml-3 text-xl">
+              <nuxt-link to="/">Ngoding Bentar</nuxt-link>
+            </span>
+            <span class="ml-3 text-xl">Cek Ongkir</span>
           </a>
         </div>
       </header>
@@ -89,7 +92,7 @@
           <div class="text-center">
             <p class="text-lg font-bold">Kurir</p>
           </div>
-          <div class="mt-4 overflow-y-auto section-kurir">
+          <div class="mt-4 text-white font-semibold overflow-y-auto section-kurir">
             <div v-for="(x, index) in biayaJne" :key="index" class="kurir flex mb-4 p-2 rounded-xl">
               <!-- <input type="radio" :id="x.service" :value="x.cost[0].value" class="my-auto" v-model="picked"> -->
               <label for="one" class="ml-4">
