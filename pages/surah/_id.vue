@@ -6,7 +6,7 @@
       </nuxt-link>
       <br/>
       <button @click="cek()">cek</button>
-      <p class="text-2xl" v-for="(x, index) in surah.text" :key="index">{{x}}</p>
+      <p class="text-2xl font-arabic" v-for="(x, index) in surah.text" :key="index">{{x}}</p>
     </div>
   </span>
 </template>
@@ -49,3 +49,29 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+@font-face {
+  font-family: "lpmq";
+  src: url(/fonts/lpmq.otf) format("opentype");
+  font-display: swap;
+}
+
+html {
+  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  word-spacing: 1px;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+
+.font-arabic{
+  font-family: "lpmq", Arial, sans-serif;
+  line-height: 2;
+}
+
+</style>

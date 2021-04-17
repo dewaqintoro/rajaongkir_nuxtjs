@@ -1,12 +1,8 @@
 <template>
   <span>
-    <div v-if="surah">
-      <h1>Quran {{surah.name_latin}}</h1>
-      <button @click="cek()">cek</button>
-      <p class="text-2xl" v-for="(x, index) in surah.text" :key="index">{{x}}</p>
-    </div>
+    <button @click="cek()">cek</button>
+    <hr/>
     <div v-if="allSurah">
-      <h1>All</h1>
         <p class="text-2xl" v-for="(x, index) in allSurah" :key="index">
           <nuxt-link :to="'/surah/'+x.index">
             {{x.latin}}
