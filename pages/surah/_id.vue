@@ -1,26 +1,24 @@
 <template>
   <span>
     <div v-if="surah">
-      <h1>Quran {{surah.name_latin}}</h1>
+      <nuxt-link to="/quran">
+        Quran
+      </nuxt-link>
+      <br/>
       <button @click="cek()">cek</button>
       <p class="text-2xl" v-for="(x, index) in surah.text" :key="index">{{x}}</p>
-    </div>
-    <div v-if="allSurah">
-      <h1>All</h1>
-        <p class="text-2xl" v-for="(x, index) in allSurah" :key="index">
-          <nuxt-link :to="'/surah/'+x.index">
-            {{x.latin}}
-          </nuxt-link>
-        </p>
     </div>
   </span>
 </template>
 <script>
-import { ref, useAsync } from '@nuxtjs/composition-api'
-import axios from 'axios'
+import { ref, useAsync, useContext } from '@nuxtjs/composition-api'
+// import axios from 'axios'
 export default {
-  name: 'Quran',
+  name: 'Surah',
   setup(){
+    const { route } = useContext()
+    const idParams = route.value?.params?.id
+
     const selectedCity = ref('')
     const asalCity = ref('')
     const surah = useAsync(async () => await getSurah())
@@ -33,8 +31,9 @@ export default {
     }
 
     async function getSurah(){
-      const resp = await import('~/data/surah/1.json')
-      return resp[1]
+      const resp = await import(`~/data/surah/${idParams}.json`)
+      // console.log(resp[idParams])
+      return resp[idParams]
     }
 
     async function getAllSurah(){
@@ -44,7 +43,8 @@ export default {
     }
 
     async function cek(){
-      console.log(allSurah?.value)
+      // console.log(allSurah?.value)
+      console.log('idParams', idParams)
     }
   }
 }
