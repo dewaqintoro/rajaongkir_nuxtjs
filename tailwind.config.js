@@ -1,5 +1,13 @@
 module.exports = {
   theme: {
+    screens: {
+      mobile: { max: '575px' },
+      tablet: { max: '767px' },
+      sm: '576px',
+      md: '768px',
+      lg: '992px',
+      xl: '1200px',
+    },
     container: {
       center: true
     },

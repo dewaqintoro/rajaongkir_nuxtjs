@@ -2,10 +2,9 @@
   <span>
     <div v-if="surah">
       <nuxt-link to="/quran">
-        Quran
+        Home
       </nuxt-link>
       <br/>
-      <button @click="cek()">cek</button>
       <p class="text-2xl font-arabic" v-for="(x, index) in surah.text" :key="index">{{x}}</p>
     </div>
   </span>
