@@ -1,8 +1,11 @@
 <template>
-  <div class="px-40 text-center">
-    <div class="text-2xl">{{surah.name}}</div>
-    <div>( {{surah.name_latin}} - {{surah.translations.id.name}} )</div>
-    <div>{{surah.number_of_ayah}} Ayat</div>
+  <div class="text-center">
+    <div class="text-3xl">{{surah.name}}</div>
+    <div class="text-xl">
+      <p>( {{surah.name_latin}} - {{surah.translations.id.name}} )</p>
+      <p>{{surah.number_of_ayah}} Ayat</p>
+      <font-awesome-icon :icon="['fab', 'twitter']" />
+    </div>
     
   </div>
 </template>

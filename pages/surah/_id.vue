@@ -5,19 +5,15 @@
         Home
       </nuxt-link>
     <hr/>
-    <Headerquran :surah="surah" />
-    <div v-if="surah">
-      
-      <div class="item"  v-for="(x, index) in surah.text" :key="x.index">
-        <div class="card">
-          <div class="flex">
-            <div class="idSurah">{{index}}</div>
-            <div class="nameSurah">
-              <p>{{x}}</p>
-              <p>{{surah.translations.id.text[index]}}</p>
-            </div>
-          </div>
-        </div>
+    <div v-if="surah" class="mt-8">
+      <Headerquran :surah="surah" />
+      <div class="item"  v-for="(surat, index) in surah.text" :key="surat.index">
+        <Cardcomp
+        :index="index"
+        :surat="surat"
+        :surah="surah"
+        :arti="surah.translations.id.text[index]"
+        />
       </div>
         
     </div>
@@ -26,10 +22,13 @@
 <script>
 import { ref, useAsync, useContext } from '@nuxtjs/composition-api'
 import Headerquran from '~/components/quran/Headerquran.vue'
+import Cardcomp from '~/components/quran/Cardcomp.vue'
+
 export default {
   name: 'Surah',
   components: {
-    Headerquran
+    Headerquran,
+    Cardcomp
   },
   setup(){
     const { route } = useContext()
@@ -50,7 +49,7 @@ export default {
     }
 
     async function cek(){
-      console.log(surah);
+      console.log(iniSurat);
     }
 
     
@@ -84,17 +83,21 @@ html {
 .item {
   @apply px-8 mx-36 my-8;
 }
-.card {
-  @apply text-2xl py-4 rounded-lg my-8;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.20);
+/* .card {
+  @apply p-4 rounded-lg my-8;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.15);
   .idSurah {
     @apply text-center;
     width: 50px;
   }
   .nameSurah {
-    @apply px-4 text-right w-full;
+    @apply px-4 w-full;
   }
 }
+
+.card:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.20);
+} */
 
 @screen mobile {
   .item {

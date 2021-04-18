@@ -11,7 +11,7 @@
               <div class="idSurah">{{x.index}}</div>
               <div class="nameSurah">
                 <p>{{x.arabic}}</p>
-                <p>{{x.latin}}</p>
+                <p class="mt-4">{{x.latin}}</p>
                 <p class="italic text-base">( {{x.translation}} : {{x.ayah_count}} ayat )</p>
               </div>
             </div>
@@ -83,8 +83,8 @@ html {
   @apply px-8 mx-36 my-8;
 }
 .card {
-  @apply text-2xl py-4 rounded-lg;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.20);
+  @apply text-3xl p-4 rounded-lg;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.15);
   .idSurah {
     @apply text-center;
     width: 50px;
@@ -93,6 +93,11 @@ html {
     @apply px-4 text-right w-full;
   }
 }
+
+.card:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.20);
+}
+
 
 @screen mobile {
   .item {
