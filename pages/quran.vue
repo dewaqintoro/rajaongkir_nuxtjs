@@ -2,7 +2,7 @@
   <span>
     <button @click="cek()">cek</button>
     <hr/>
-    <div v-if="allSurah">
+    <div v-if="allSurah" class="font-arabic">
       
       <div class="item"  v-for="(x, index) in allSurah" :key="index">
         <a :href="'/surah/'+x.index">
@@ -10,7 +10,7 @@
             <div class="flex">
               <div class="idSurah">{{x.index}}</div>
               <div class="nameSurah">
-                <p class="font-arabic">{{x.arabic}}</p>
+                <p>{{x.arabic}}</p>
                 <p>{{x.latin}}</p>
                 <p class="italic text-base">( {{x.translation}} : {{x.ayah_count}} ayat )</p>
               </div>
