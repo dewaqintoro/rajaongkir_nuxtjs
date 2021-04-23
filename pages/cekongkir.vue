@@ -15,13 +15,13 @@
         </div>
       </header>
     </div>
-    <div class="block lg:flex my-8 px-8 justify-between">
-      <div class="w-full lg:w-4/6 p-8">
+    <div class="section lg:flex">
+      <div class="section-input lg:w-4/6">
         <div class="bg-white p-8 rounded-3xl">
-          <div class="flex">
-            <form class="w-1/2 border-r-2">
-              <div class="flex flex-wrap mb-6 w-full">
-                <div class="w-full px-3 mb-6 md:mb-0">
+          <div class="main">
+            <form class="content">
+              <div class="items">
+                <div class="item">
                   <h1 class="font-bold text-xl">Alamat Asal</h1>
                   <label class="block  tracking-wide text-black text-xs font-semibold mt-4 mb-3" for="grid-first-name">
                     Pilih Provinsi
@@ -33,8 +33,8 @@
                   </div>
                 </div>
               </div>
-              <div class="flex flex-wrap mb-6 w-full">
-                <div class="w-full px-3 mb-6 md:mb-0">
+              <div class="items">
+                <div class="item">
                   <label class="block  tracking-wide text-black text-xs font-semibold mt-4 mb-3" for="grid-first-name">
                     Pilih Kota
                   </label>
@@ -45,19 +45,11 @@
                   </div>
                 </div>
               </div>
-              <div class="flex flex-wrap mb-2">
-                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                  <label class="block tracking-wide text-black text-xs font-bold mb-2" for="grid-city">
-                    Berat (gram)
-                  </label>
-                  <input v-model="berat" @change="cek($event)"  class="appearance-none block w-full text-black border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" placeholder="1000">
-                </div>
-              </div>
             </form>
-            <form class="w-1/2 border-l-2">
-              <div class="flex flex-wrap mb-6 w-full">
-                <div class="w-full px-3 mb-6 md:mb-0">
-                  <h1 class="font-bold text-xl">Alamat Tujuan</h1>
+            <form class="content">
+              <div class="items">
+                <div class="item">
+                  <h1 class="tujuan font-bold text-xl">Alamat Tujuan</h1>
                   <label class="block tracking-wide text-black text-xs font-semibold mt-4 mb-3" for="grid-first-name">
                     Pilih Provinsi
                   </label>
@@ -68,8 +60,8 @@
                   </div>
                 </div>
               </div>
-              <div class="flex flex-wrap mb-6 w-full">
-                <div class="w-full px-3 mb-6 md:mb-0">
+              <div class="items">
+                <div class="item">
                   <label class="block  tracking-wide text-black text-xs font-semibold mt-4 mb-3" for="grid-first-name">
                     Pilih Kota
                   </label>
@@ -80,14 +72,22 @@
                   </div>
                 </div>
               </div>
+              <div class="berat flex flex-wrap mb-2">
+                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                  <label class="block tracking-wide text-black text-xs font-bold mb-2" for="grid-city">
+                    Berat (gram)
+                  </label>
+                  <input v-model="berat" @change="cek($event)"  class="appearance-none block w-full text-black border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" placeholder="1000">
+                </div>
+              </div>
             </form>
           </div>
-          <button @click="cekBiaya()" class="focus:outline-none bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+          <button @click="cekBiaya()" class="cek-biaya focus:outline-none justify-end text-white font-bold py-2 px-4 rounded-full">
             Cek biaya
           </button>
         </div>
       </div>
-      <div class="w-full lg:w-2/6 p-8 ">
+      <div class="section-input lg:w-2/6 ">
         <div class="bg-white p-8 rounded-3xl">
           <div class="text-center">
             <p class="text-lg font-bold">Kurir</p>
@@ -216,11 +216,33 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="postcss" scoped>
+.section {
+  @apply block my-8 px-8 justify-between;
+}
+.section-input {
+  @apply w-full p-8;
+}
+.main {
+  @apply flex;
+}
+.content {
+  @apply w-1/2 border-r-2 border-l-2;
+}
+.items{
+  @apply flex flex-wrap mb-6 w-full;
+  .item {
+    @apply w-full px-3 mb-6;
+  }
+}
 .garis {
   width: 5px;
   height: 30vh;
   background: black;
+}
+
+.cek-biaya {
+  background: #0fbcf9;
 }
 .kurir {
   background: #0fbcf9;
@@ -229,4 +251,32 @@ export default {
 .section-kurir {
   max-height: 350px;
 }
+
+@media only screen and (max-width: 650px) {
+  .main {
+    @apply block;
+  }
+  .section {
+    @apply px-2;
+  }
+  .section-input {
+    @apply w-full p-2;
+  }
+  .content {
+    @apply w-full border-r-0 border-l-0;
+  }
+  .items{
+    @apply mb-0;
+    .item {
+      @apply mb-2;
+      .tujuan {
+        @apply mt-8;
+      }
+    }
+  }
+  .berat {
+    @apply mt-8;
+  }
+}
+
 </style>
